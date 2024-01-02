@@ -11,36 +11,36 @@ func logError(fnName string, err error) {
 	}
 }
 
-func Save(model interface{}) interface{} {
+func Save(model interface{}) error {
 	err := database.DB.Create(model).Error
 	logError("Save", err)
 
 	return err
 }
 
-func FindOne(model interface{}) interface{} {
+func FindOne(model interface{}) error {
 	err := database.DB.Find(model).Error
 	logError("FindOne", err)
 
 	return err
 }
 
-func FindAll(model interface{}) interface{} {
+func FindAll(model interface{}) error {
 	err := database.DB.Last(model).Error
 	logError("FindAll", err)
 
 	return err
 }
 
-func Update(id string, model interface{}) interface{} {
-	err := database.DB.Update(id, model).Error
+func Update(model interface{}, update interface{}) error {
+	err := database.DB.Model(model).Updates(update).Error
 	logError("Update", err)
 
 	return err
 }
 
-func Delete(id string, model interface{}) interface{} {
-	err := database.DB.Delete(id, model).Error
+func Delete(model interface{}) error {
+	err := database.DB.Delete(model).Error
 	logError("Delete", err)
 
 	return err

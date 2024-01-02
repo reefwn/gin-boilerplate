@@ -17,4 +17,7 @@ func RegisterRoutes(route *gin.Engine) {
 	// example
 	example := route.Group("/example")
 	example.GET("", controllers.GetAllExample)
+	example.POST("", controllers.CreateExample)
+	example.PUT("", controllers.UpdateExample)
+	example.DELETE("/:id", controllers.DeleteExample)
 }
