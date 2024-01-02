@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:13-alpine
+    platform: linux/arm64
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - db=${DB_NAME}
+    volumes:
+      - dev_postgres_data:/var/lib/postgresql/data/
+    restart: always
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    ports:
+      - ${HTTP_PORT}:${HTTP_PORT}
+    depends_on:
+      - db
+    links:
+      - db:db
+    volumes:
+      - .:/app
+    restart: always
+
+volumes:
+  dev_postgres_data:
