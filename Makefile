@@ -17,3 +17,6 @@ build:
 
 clean:
 	docker-compose -f docker-compose.yml down -v
+
+test:
+	go test -v ./tests/*
