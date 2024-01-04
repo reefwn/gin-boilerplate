@@ -9,9 +9,10 @@ services:
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - db=${DB_NAME}
+      - POSTGRES_DB=${DB_NAME}
     volumes:
-      - dev_postgres_data:/var/lib/postgresql/data/
+      - database:/var/lib/postgresql/data/
+      - ./docker/postgres/docker-entrypoint-initdb:/docker-entrypoint-initdb.d/
     restart: always
 
   api:
@@ -29,4 +30,4 @@ services:
     restart: always
 
 volumes:
-  dev_postgres_data:
+  database:
