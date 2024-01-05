@@ -18,16 +18,9 @@ func Save(model interface{}) error {
 	return err
 }
 
-func FindOne(model interface{}) error {
+func Find(model interface{}) error {
 	err := database.DB.Find(model).Error
-	logError("FindOne", err)
-
-	return err
-}
-
-func FindAll(model interface{}) error {
-	err := database.DB.Last(model).Error
-	logError("FindAll", err)
+	logError("Find", err)
 
 	return err
 }

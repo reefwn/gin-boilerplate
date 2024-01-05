@@ -15,6 +15,16 @@ func GetAllExample(ctx *gin.Context) {
 	response.ReturnResponse(ctx, http.StatusOK, example)
 }
 
+func GetOneExample(ctx *gin.Context) {
+	id := ctx.Param("id")
+	if err := uuid.Validate(id); err != nil {
+		response.ReturnResponse(ctx, http.StatusBadRequest, err.Error())
+		return
+	}
+	example := services.FindOneExample(id)
+	response.ReturnResponse(ctx, http.StatusOK, example)
+}
+
 func CreateExample(ctx *gin.Context) {
 	var json models.Example
 	if err := ctx.ShouldBindJSON(&json); err != nil {

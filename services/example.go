@@ -9,9 +9,18 @@ import (
 
 func FindAllExample() []*models.Example {
 	var example []*models.Example
-	repository.FindAll(&example)
+	repository.Find(&example)
 
 	return example
+}
+
+func FindOneExample(id string) *models.Example {
+	model := models.Example{
+		Id: uuid.MustParse(id),
+	}
+	repository.Find(&model)
+
+	return &model
 }
 
 func CreateExample(body *models.Example) error {
